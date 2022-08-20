@@ -194,3 +194,7 @@ a.custom-card:hover {
   width: 1%;
   white-space: nowrap;
 }
+
+#footer_login{
+  margin-top: 8em;
+}
