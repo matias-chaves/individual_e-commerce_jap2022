@@ -16,14 +16,34 @@
   </style>
 </head>
 
-<body>
-  <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+<!-- background-color al body -->
+<body class="bg-light">
+
+  <!-- Estrutura y estilo login con Bootstrap -->
+  <div class="text-center" id="divisor_login" >
+    <form style="max-width:300px; margin:0 auto;">
+      <img class="mt-5" src="img/login.png" alt="login-image" width="300px" height="auto">
+      <h1 class="h3 mt-3 mb-3 font-weight-normal">Inicio de sesión</h1>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Email" class="form-control" required>
+      <label for="password">Constraseña</label>
+      <input type="password" name="password" id="password" placeholder="Contraseña" class="form-control" required>
+      <div class="mt-4">
+        <button id="sign_in" class="btn btn-lg btn-block btn-primary">Ingresar</button>
       </div>
-    </div>
-  </main>
+
+  <!-- BOTON DE GOOGLE -->
+      <div id="g_id_onload"
+      data-client_id="283303264533-5gt9ftqnuvmtuobsku6nka883oacq0bp.apps.googleusercontent.com"
+      data-callback="onsuccess"
+      class="mt-2">
+      <p class="text-muted">-or-</p>
+      </div>
+      <div class="g_id_signin" data-type="standard"></div>
+    </form>
+  </div>
+  
+  <!-- FOOTER -->
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -35,6 +55,10 @@
     </div>
   </footer>
   <script src="js/login.js"></script>
+
+  
+  <!-- SCRIPT GOOGLE -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
 
 </html>
