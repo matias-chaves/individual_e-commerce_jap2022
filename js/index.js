@@ -12,3 +12,7 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 });
+
+
+// llamando a la funcion nombre de usuario
+obtener_datos();

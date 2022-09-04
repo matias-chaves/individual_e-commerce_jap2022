@@ -31,7 +31,7 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
-            <a href="login.html" class="nav-link btn btn-secondary">Ingresar</a>
+            <a id="login_btn" href="login.html" class="btn btn-secondary">Ingresar</a>
           </li>
         </ul>
       </div>
@@ -41,17 +41,62 @@
 <!-- Titulo productos -->
 <div class="text-center mt-3">
   <h1>Productos</h1>
-  <p class="mt-3">Veras aqui todos los productos de la categoria Autos</p>
+  <p class="mt-3" id="descripcion">Verás aquí todos los productos de la categoría </p>
 </div>
 
-<!-- Tabla -->
+
+
 <div class="container mt-5 mb-5 rounded">
-  <table class="table table-borderles" id="table">
-    <tbody id="tablebody">
-      
-    </tbody>
-  </table>
-</div>
+
+  <!-- Botones de filtro -->
+    <div class="row">
+      <div class="col text-end">
+        <div class="btn-group mb-3">
+          <button id="btn_AZ" class="btn btn-light">Menor precio</button>
+          <button id="btn_ZA" class="btn btn-light">Mayor precio</button>
+          <button id="btn_Asc" class="btn btn-light">Relevancia</button>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+      <div class="container">
+        <!-- search bar -->
+        <div class="row text-end">
+          <div class="col input-group">
+            <input id="search_bar" class="form-control" type="text" placeholder="search...">
+            <span class="input-group-text border-0">
+              <i class="fas fa-search"></i>
+            </span>
+            
+          <!-- filtro rango de precio -->
+          </div>
+          <div class="col">
+            <p class="my-2">Rango de precio</p>
+          </div>
+          <div class="col-1">
+              <input id="min_input" class="form-control" type="text" placeholder="min">
+          </div>
+          <div class="col-1">
+            <input id="max_input" class="form-control" type="text" placeholder="max">
+          </div>
+          <div style="padding:0px;" class="col btn-group">
+            <button id="btn_filter" class="btn btn-light">Filtrar</button>
+            <button id="btn_clean" class="btn btn-danger">Limpiar</button>
+          </div>
+        </div>
+      </div>
+  
+  
+  
+    <!-- Tabla de productos -->
+    <table class="table table-borderles" id="table">
+      <tbody id="tablebody">
+        
+      </tbody>
+    </table>
+  </div>
 
   <footer class="text-muted">
     <div class="container">
