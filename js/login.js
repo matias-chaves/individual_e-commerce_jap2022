@@ -8,6 +8,7 @@ let alerta = document.getElementById('alerta')
 function input_complete(e) {
     e.preventDefault()
     if(email.value.includes('@') && pw.value.length !== 0){
+        localStorage.setItem('usuario',email.value);
         window.location.href = "index.html"
     }else{
         alert("Algo anda mal! Ingrese los campos correctamente.")

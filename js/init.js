@@ -46,7 +46,7 @@ let login_btn = document.getElementById('login_btn');
 
 // funcion para obtener datos
 function obtener_datos() {
-    if(localStorage.getItem('usuario')){
+    if(localStorage.getItem('usuario') !== null){
         login_btn.innerHTML = localStorage.getItem('usuario');
     }else{
         console.log("No aparece nada");
