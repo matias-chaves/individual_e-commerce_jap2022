@@ -1,12 +1,15 @@
+const EXT_TYPE = ".json";
 const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
 const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publish.json";
 //Concatenado a esta variable esta el catID referente a la categoria del producto.
-const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem('catID') + ".json";
-const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
-const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
+const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem('catID') + EXT_TYPE;
+
+const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/" + localStorage.getItem('prodID') + EXT_TYPE;
+
+const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/" + localStorage.getItem('prodID') + EXT_TYPE;
+
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
-const EXT_TYPE = ".json";
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -46,7 +49,7 @@ let login_btn = document.getElementById('login_btn');
 
 // funcion para obtener datos
 function obtener_datos() {
-    if(localStorage.getItem('usuario') !== null){
+    if(localStorage.getItem('usuario')!==null){
         login_btn.innerHTML = localStorage.getItem('usuario');
     }else{
         console.log("No aparece nada");
@@ -55,3 +58,8 @@ function obtener_datos() {
 
 // llamando a la funcion
 obtener_datos();
+
+function setProdID(id) {
+  localStorage.setItem("prodID", id);
+  window.location = "product-info.html"
+}

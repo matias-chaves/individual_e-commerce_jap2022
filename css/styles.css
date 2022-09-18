@@ -198,3 +198,31 @@ a.custom-card:hover {
 #footer_login{
   margin-top: 8em;
 }
+
+#info_contenedor{
+  overflow:auto;
+}
+
+#info_contenedor p{
+  margin-top: 1em;
+  margin-bottom: 0em;
+}
+
+#carousel_info_product{
+  margin-right:0px;
+  max-width: 35em;
+  float: left;
+}
+
+#html_info_product{
+max-width: 40em;
+float:right;
+}
+
+#divpuntaje{
+  display: flex;
+}
+
+#divpuntaje label{
+  padding-top: 7px;
+}

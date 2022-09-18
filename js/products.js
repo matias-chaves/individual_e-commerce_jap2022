@@ -25,11 +25,13 @@ search_bar.addEventListener('input',searchbar);
 fetch(PRODUCTS_URL)
 .then(response => response.json())
 .then(data=>{
-    document.getElementById('descripcion').innerHTML = `<p>Verás aquí todos los productos de la categoría ${data.catName}</p>`
 
     product_list = data.products;
 
-    HTML_list(product_list)
+    HTML_list(product_list);
+
+    document.getElementById('descripcion').innerHTML = `<p>Verás aquí todos los productos de la categoría ${data.catName}</p>`
+
 })
 .catch(error=>console.log(error))
 
@@ -118,12 +120,13 @@ function clean_filter(){
 
 //Lista que muestra products
 function HTML_list(param){
+    console.log(param);
     
     let Print_products = ""
     for (let i = 0; i < param.length; i++) {
     //Muestra una tabla de productos en el html
     Print_products += `
-    <tr>
+    <tr onclick="setProdID(${param[i].id})" class="list-group-item-action cursor-active">
         <td class="tdbody">
             <img src="${param[i].image}" class="img-thumbnail" style="max-width:200px;">
         </td>
