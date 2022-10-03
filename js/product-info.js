@@ -15,6 +15,7 @@ fetch(PRODUCT_INFO_URL)
     product_info_list = info_product
 
     PROD_INFO_LAYOUT(product_info_list)
+    relatedProd(product_info_list)
   })
   .catch(err => console.log(err))
 
@@ -173,10 +174,20 @@ function addComment(e) {
 
 }
 
+function relatedProd(param) {
+  for (let a = 0; a < param.relatedProducts.length; a++) {
+    console.log(param.relatedProducts[a]);
+    document.getElementById('cards').innerHTML +=`
+    <div onclick="setProdID(${param.relatedProducts[a].id})" class="card col cursor-active" style="max-width: 18rem; margin-right:2rem; padding:0px">
+      <img src="${param.relatedProducts[a].image}" class="card-img-top">
+    <div class="card-body">
+      <h5 class"card-title">${param.relatedProducts[a].name}</h5>
+    </div>
+    </div>
+    `
+  }
+}
+
+
 //button enviar
 btn_enviarcomment.addEventListener('click',addComment)
-
-
-
-
-

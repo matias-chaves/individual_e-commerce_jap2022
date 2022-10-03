@@ -47,12 +47,28 @@ let getJSONData = function(url){
 // variable boton ingresar
 let login_btn = document.getElementById('login_btn');
 
+function removeItem() {
+  localStorage.removeItem('usuario')
+}
+
 // funcion para obtener datos
 function obtener_datos() {
-    if(localStorage.getItem('usuario')!==null){
-        login_btn.innerHTML = localStorage.getItem('usuario');
+    if(localStorage.getItem('usuario')){
+        login_btn.innerHTML = `
+        <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          ${localStorage.getItem('usuario')}
+        </button>
+      
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+          <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+          <li><a onclick="removeItem()" class="dropdown-item" href="login.html">Cerrar sesion</a></li>
+        </ul>
+      </div>
+        `
     }else{
-        console.log("No aparece nada");
+        login_btn.innerHTML = `<a href="login.html" class="btn btn-secondary">Ingresar</a>`;
     }
 }
 
