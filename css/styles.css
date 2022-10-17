@@ -226,3 +226,10 @@ float:right;
 #divpuntaje label{
   padding-top: 7px;
 }
+
+#h1_carrito{
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  text-align: center;
+}
+
