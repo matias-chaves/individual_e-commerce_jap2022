@@ -5,6 +5,7 @@ let comments = [];
 //input comment y boton enviar
 let input_textarea = document.getElementById('comment_area');
 let btn_enviarcomment = document.getElementById('btn_enviarcomment');
+let btn_buy = document.getElementById('btn-buy');
 
 
 //Fetch product info
@@ -16,6 +17,8 @@ fetch(PRODUCT_INFO_URL)
 
     PROD_INFO_LAYOUT(product_info_list)
     relatedProd(product_info_list)
+
+    
   })
   .catch(err => console.log(err))
 
@@ -71,17 +74,41 @@ function PROD_INFO_LAYOUT(param){
             </div>
           </div>
           <div class="col" id="html_info_product">
+          <div>
           <p><strong>Precio</strong></p>
           ${param.currency} ${param.cost}
+          </div>
+          <div>
           <p><strong>Descripción</strong></p>
           ${param.description}
+          </div>
+          <div>
           <p><strong>Categoría</strong></p>
           ${param.category}
+          </div>
+          <div>
           <p><strong>Cantidad de vendidos</strong></p>
           ${param.soldCount}
           </div>
+          </div>
         </div>
         `
+
+        function addtocart (){
+          if(localStorage.getItem('cart_item') == null){
+            localStorage.setItem('cart_item','[]')
+          }
+
+          let array_idproduct = JSON.parse(localStorage.getItem('cart_item'))
+
+          array_idproduct.push(param)
+
+          localStorage.setItem('cart_item',JSON.stringify(array_idproduct))
+
+          window.location.href='cart.html'
+        }
+        
+        let btn_buy = document.getElementById('btn-buy').addEventListener('click',addtocart)
 
       console.log(param);
       document.getElementById('info_contenedor').innerHTML = HTML_print
@@ -191,3 +218,4 @@ function relatedProd(param) {
 
 //button enviar
 btn_enviarcomment.addEventListener('click',addComment)
+

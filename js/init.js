@@ -8,7 +8,8 @@ const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/" + 
 
 const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/" + localStorage.getItem('prodID') + EXT_TYPE;
 
-const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
+const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/"+"25801"+ EXT_TYPE;
+
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 
 let showSpinner = function(){
