@@ -1,4 +1,5 @@
 //Variables
+
 const tableCartHTML = document.getElementById('TableCartHTML');
 
 const premiumRadio = document.getElementById('premiumradio');
@@ -36,6 +37,7 @@ let initial_cost_of_shipping = 0.15
 let sumOfTotals = 0
 
 
+document.addEventListener('DOMContentLoaded',displayAllItems)
 //event that show totals
 document.addEventListener('DOMContentLoaded',updateTotals)
 //event that change the radios total
@@ -76,18 +78,21 @@ function updateShippingCost(){
 
 
 function updateTotals() {
+
+    let local_cart_items = JSON.parse(localStorage.getItem('cart'));
+
     // consigo un array de los productos en pesos
     let producto_UYU = local_cart_items.filter(el => el.currency == "UYU")
 
     let producto_USD = local_cart_items.filter(elem => elem.currency == "USD")
 
     const sumUSD = producto_USD.reduce((summarize,num)=>{
-        return summarize + num.subtotal
+        return Math.round(summarize + num.subtotal)
     },0)
 
     // convierto los productos en pesos a dolares
     const sumUYU = producto_UYU.reduce((total,number)=>{
-        return total + (number.subtotal / 40)
+        return Math.round(total + (number.subtotal / 40))
     }, 0)
 
     
@@ -98,17 +103,17 @@ function updateTotals() {
     
     //updating in realtime when the quantity of items change
     if(premiumRadio.checked){
-        cost_of_shipping = Math.floor(updatedTotal * premiumRadio.value)
+        cost_of_shipping = Math.round(updatedTotal * premiumRadio.value)
         // console.log(cost_of_shipping);
         sumOfTotals = updatedTotal + cost_of_shipping
     }
     if(expressRadio.checked){
-        cost_of_shipping = Math.floor(updatedTotal * expressRadio.value)
+        cost_of_shipping = Math.round(updatedTotal * expressRadio.value)
         // console.log(cost_of_shipping);
         sumOfTotals = updatedTotal + cost_of_shipping
     }
     if(standardRadio.checked){
-        cost_of_shipping = Math.floor(updatedTotal * standardRadio.value)
+        cost_of_shipping = Math.round(updatedTotal * standardRadio.value)
         // console.log(cost_of_shipping);
         sumOfTotals = updatedTotal + cost_of_shipping
     }
@@ -120,8 +125,20 @@ function updateTotals() {
     
 }
 
+function emptyCart(){
+    let local_cart_items = JSON.parse(localStorage.getItem('cart'));
+
+    if(local_cart_items.length === 0){
+        document.getElementById('alert-info').classList.add('show')
+
+        tableCartHTML.innerHTML =""
+    }
+}
+
 
 function deleteItem(id){
+
+    let local_cart_items = JSON.parse(localStorage.getItem('cart'));
 
     for (let i = 0; i < local_cart_items.length; i++) {
 
@@ -129,15 +146,16 @@ function deleteItem(id){
             local_cart_items.splice(i,1)
             localStorage.setItem('cart',JSON.stringify(local_cart_items))
             updateTotals()
-
-            
         }
+
+        displayAllItems()
+        emptyCart()
     }
 }
 
-if(localStorage.getItem('cart')){
+function displayAllItems(){
 
-    var local_cart_items = JSON.parse(localStorage.getItem('cart'))
+    let local_cart_items = JSON.parse(localStorage.getItem('cart'))
 
     let cart_tableData = "";
 
@@ -168,15 +186,15 @@ if(localStorage.getItem('cart')){
 
         tableCartHTML.innerHTML = cart_tableData
 
-        console.log(item);
-
     }
+    emptyCart()
 
-
+}
 
 
     //Event that update the subtotal by quantity 
     tableCartHTML.addEventListener('change',(e)=>{
+        let local_cart_items = JSON.parse(localStorage.getItem('cart'))
         //target the input value
         let quantity = e.target.value
         //target the input id value to set the subtotal id after
@@ -184,28 +202,25 @@ if(localStorage.getItem('cart')){
         //setting the subtotal id
         let subtotal =  document.getElementById('cost'+quantity_id)
         //finding an elemenent that match the element.id with te quantity.id
-        let product = local_cart_items.find(element => 
+        let product = local_cart_items.find(element =>
             element.id == quantity_id
         )
 
+        let itemtoPush = local_cart_items.findIndex(it => it.id == quantity_id)
+        
 
-
-
-        // console.log(product);
+        // console.log(quantity_id);
         //modifying the subtotal content
         subtotal.textContent = `${product.currency} ${product.cost * quantity}`
 
-        local_cart_items.push(product.subtotal = product.cost * quantity, product.count = parseInt(quantity))
+        local_cart_items[itemtoPush].subtotal = (product.cost * quantity);
+        local_cart_items[itemtoPush].count = parseInt(quantity);
+
+
+        localStorage.setItem('cart',JSON.stringify(local_cart_items))
 
         updateTotals()
-        deleteItem()
     })
-}
-
-
-
-
-
 
 
 
@@ -216,6 +231,8 @@ function alertSuccess (){
 function alertDanger (){
     document.getElementById('alert-danger').classList.add('show')
 }
+
+
 
 
 function checkModal(){
