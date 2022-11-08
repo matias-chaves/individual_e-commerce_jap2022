@@ -26,7 +26,7 @@ fetch(PRODUCT_INFO_URL)
 fetch(PRODUCT_INFO_COMMENTS_URL)
   .then(resp => resp.json())
   .then(comment_product=>{
-  console.log(comment_product);
+  // console.log(comment_product);
   comments = comment_product;
 
   COMMT_PRODUCT(comments);
@@ -94,23 +94,50 @@ function PROD_INFO_LAYOUT(param){
         </div>
         `
 
+        //function addtocart
         function addtocart (){
-          if(localStorage.getItem('cart_item') == null){
-            localStorage.setItem('cart_item','[]')
+          //if cart key is not null then set cart key
+          if(localStorage.getItem('cart') == null){
+            localStorage.setItem('cart','[]')
           }
 
-          let array_idproduct = JSON.parse(localStorage.getItem('cart_item'))
+          //create an array that allocate the cart key value
+          let localItems = JSON.parse(localStorage.getItem('cart'))
+          
+          //if array of items length is equal to 0 then push the product info, else if find an element id is equal to prod id increase element count by 1
+          if(localItems.length == 0){
+            localItems.push({
+              id:param.id,
+              image:param.images[0],
+              name:param.name,
+              cost:param.cost,
+              count:1,
+              subtotal:param.cost,
+              currency:param.currency})
+          }else{
 
-          array_idproduct.push(param)
+           let found = localItems.find(element => element.id === param.id)
+            if(found === undefined){
+              localItems.push({
+                id:param.id,
+                image:param.images[0],
+                name:param.name,
+                cost:param.cost,
+                count:1,
+                subtotal:param.cost,
+                currency:param.currency})
+              }
+          }
+          //set localItems to localstorage
+          localStorage.setItem('cart',JSON.stringify(localItems))
 
-          localStorage.setItem('cart_item',JSON.stringify(array_idproduct))
-
+          //redirect to cart.html
           window.location.href='cart.html'
         }
         
-        let btn_buy = document.getElementById('btn-buy').addEventListener('click',addtocart)
+        btn_buy.addEventListener('click',addtocart)
 
-      console.log(param);
+      // console.log(param);
       document.getElementById('info_contenedor').innerHTML = HTML_print
 }
 
@@ -203,7 +230,7 @@ function addComment(e) {
 
 function relatedProd(param) {
   for (let a = 0; a < param.relatedProducts.length; a++) {
-    console.log(param.relatedProducts[a]);
+    // console.log(param.relatedProducts[a]);
     document.getElementById('cards').innerHTML +=`
     <div onclick="setProdID(${param.relatedProducts[a].id})" class="card col cursor-active" style="max-width: 18rem; margin-right:2rem; padding:0px">
       <img src="${param.relatedProducts[a].image}" class="card-img-top">

@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
@@ -54,52 +55,195 @@
               <th scope="col">Costo</th>
               <th scope="col">Cantidad</th>
               <th scope="col">Subtotal</th>
+              <th scope="col"></th>
             </tr>
           </thead>
-          <tbody id="cart_tableData">
+          <tbody id="TableCartHTML">
 
           </tbody>
         </table>
       </div>
+    </div>
 
-      <hr class="mb-4">
-
-      <div class="d-flex row">
-        <h3>Tipo de envio</h3>
+    <hr class="mb-4">
+    <div class="container">
+    <!-- Shipping type section -->
+    <div class="d-flex row">
+      <h3>Tipo de envio</h3>
+      <div id="div_radios">
         <div>
-          <input type="radio" name="shippingtype" id="premiumradio">
+          <input class="form-check-input" type="radio" name="shippingtype" id="premiumradio" value="0.15" checked>
           <label for="premiumradio">Premium 2 a 5 días (15%)</label>
         </div>
         <div>
-          <input type="radio" name="shippingtype" id="expressradio">
-          <label for="premiumradio">Express 5 a 8 días (7%)</label></div>
+          <input class="form-check-input" type="radio" name="shippingtype" id="expressradio" value="0.07">
+          <label for="expressradio">Express 5 a 8 días (7%)</label></div>
         <div>
-          <input type="radio" name="shippingtype" id="standardradio">
-          <label for="premiumradio">Premium 12 a 15 días (5%)</label>
+          <input class="form-check-input" type="radio" name="shippingtype" id="standardradio"  value="0.05">
+          <label for="standardradio">Standard 12 a 15 días (5%)</label>
         </div>
       </div>
 
-      <form>
-        <div style="margin-top:2rem;" class="row g-3">
-          <h3>Dirección de envío</h3>
-          <div class="col-sm-5">
-            <h5>Calle</h5>
-            <input type="text" class="form-control" id="usrstreet">
-          </div>
-          <div class="col-sm-4">
-            <h5>Número</h5>
-            <input type="tel" class="form-control" id="usrnumber">
-          </div>
-          <div class="col-sm-5">
-            <h5>Esquina</h5>
-            <input type="text" class="form-control" id="urscorner">
-          </div>
-      </form>
+    </div>
 
-      <hr>
 
+
+    <!-- TotalCost section -->
+
+    <div style="margin-top:2rem ;">
+      <h3>Costos</h3>
+      <div id="totalCost" class="">
+        <ul class="list-group">
+          <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <p>Subtotal</p>
+                <span id="subtotal_span" class="text-muted"></span>
+              </div>
+              <div class="d-flex justify-content-between text-muted">
+                <small>Costo unitario del producto por cantidad </small>
+              </div>
+          </li>
+          <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <p>Costo de envío</p>
+                <span id="shipping_span" class="text-muted"></span>
+              </div>
+              <div class="d-flex justify-content-between text-muted">
+                <small>Según el tipo de envío</small>
+              </div>
+          </li>
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between">
+              <p>Total {$}</p>
+              <strong id="total_span"></strong>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
+    </div>
+
+
+    <form class="container needs-validation" id="form" novalidate>
+    <!-- Direction section -->
+    <div style="margin-top:2rem;" class="row g-3" id="div_address">
+      <h3>Dirección de envío</h3>
+      <div class="col-sm-5">
+        <h5>Calle</h5>
+        <input type="text" class="form-control address"  id="usrstreet" required>
+        <div class="invalid-feedback">
+          Debe ingresar una calle
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <h5>Número</h5>
+        <input type="tel" class="form-control address"  id="usrnumber" required>
+        <div class="invalid-feedback">
+          Debe ingresar un número
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <h5>Esquina</h5>
+        <input type="text" class="form-control address"  id="urscorner" required>
+        <div class="invalid-feedback">
+          Debe ingresar una esquina
+        </div>
+      </div>
+    </div>
+
+            
+    <hr>
+  
+    <div>
+      <h3>Forma de pago</h3>
+
+      <div class="d-flex" id="payment_modalLink">
+        <p id="payment_type">Selecciona una forma de pago </p>
+          <a class="link" type="button" style="margin-left:1rem;" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+            Seleccionar
+          </a>
+      </div>
+      <div class="invalid-feedback">
+        Debe seleccionar una forma de pago
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <button id="form_send" type="submit" class="btn btn-primary col-12 col-sm-12 col-md-12 col-lg-8"> Finalizar compra </button>
+    </div>
+
+    </form>
+
+    <!-- modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Forma de pago</h5>
+          </div>
+          <div class="modal-body">
+            <input type="radio" name="payment_method" class="form-check-input" id="radio_creditCard" required>
+            <label>Tarjeta de crédito</label>
+            <hr>
+            <div class="row">
+              <div class="col-6">
+                <label>Número de tarjeta</label>
+                <input type="text" class="form-control" id="card_number" required>
+                <div class="invalid-feedback">
+                  Debe ingresar un número correcto
+                </div>
+              </div>
+              <div class="col-6">
+                <label>Código de seg.</label>
+                <input type="tel" class="form-control" id="card_sec" required>
+                <div class="invalid-feedback">
+                  Debe ingresar un código correcto
+                </div>
+              </div>
+              <div class="col-6 mt-1">
+                <label>Vencimiento MM/AA</label>
+                <input type="text" class="form-control" id="card_expiration" required>
+                <div class="invalid-feedback">
+                  Debe ingresar una fecha correcta
+                </div>
+              </div>
+            </div>
+            <div class="mt-3">
+              <input type="radio" name="payment_method" class="form-check-input" id="bank_transfer" required>
+              <label>Transferencia bancaria</label>
+            </div>
+            <hr>
+            <div class="col-6">
+              <label>Número de cuenta</label>
+              <input type="text" class="form-control" id="transf_accountNum" required>
+              <div class="invalid-feedback">
+                El numero de cuenta no es el correcto
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
+      ¡Has comprado con éxito!
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible fade" role="alert" id="alert-danger">
+      Algo anda mal D: verifica tus datos!
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-info alert-dismissible fade" role="alert" id="alert-info">
+      Uh-oh parece que no tienes nada en tu carrito! :/ <a href="categories.html" class="alert-link">Haz click aqui!</a>. 
+    </div>
+    
+
 
 
   </main>
