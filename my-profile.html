@@ -44,18 +44,106 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="login_btn">
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+
+
+    <div class="container w-lg-50 w-md-50">
+          <!-- profile title and photo -->
+      <div class="my-3 d-flex justify-content-between">
+
+        <div class="mt-4">
+          <h3>Perfil</h3>
+        </div>
+  
+        <div>
+          <img style="border-radius:1%;width: 80px;" class="img-thumbnail" src="img/img_perfil.png" alt="profile photo" id="userProfilePhoto">
+        </div>
       </div>
+
+      <hr>
+      <!-- form inputs -->
+      <div>
+        <form id="my-profile-from">
+          <!-- usernames inputs -->
+          <div class="d-flex justify-content-between mb-3">
+            <div class="col-5">
+              <label class="form-label">Primer nombre*</label>
+              <input class="form-control" type="text" name="name" id="username" required>
+              <div class="invalid-feedback">
+                Debe de ingresar su nombre
+              </div>
+            </div>
+  
+            <div class="col-5">
+              <label class="form-label">Segundo nombre</label>
+              <input class="form-control" type="text" name="name" id="usersecondname">
+            </div>  
+          </div>
+
+          <!-- surnames inputs -->
+          <div class="d-flex justify-content-between mb-3">
+            <div class="col-5">
+              <label class="form-label">Primer apellido*</label>
+              <input class="form-control" type="text" name="name" id="usersurname" required>
+              <div class="invalid-feedback">
+                Debe ingresar su apellido
+              </div>
+            </div>
+  
+            <div class="col-5">
+              <label class="form-label">Segundo apellido</label>
+              <input class="form-control" type="text" name="name" id="usersecondsurname">
+            </div>
+          </div>
+
+          <!-- email and img source -->
+
+          <div class="d-flex justify-content-between mb-3">
+            <div class="col-5">
+              <label class="form-label">Email*</label>
+              <input class="form-control" type="email" id="userEmail" required>
+              <div class="invalid-feedback">
+                Debe ingresar su email de contacto
+              </div>
+            </div>
+
+            <div class="col-5">
+              <label class="form-label">Imagen de perfil</label>
+              <input class="form-control" type="file" name="userprofileimage" id="userprofileimage">
+            </div>
+          </div>
+
+          <!-- userphone number -->
+          <div>
+            <div class="col-5">
+              <label class="form-label">Telefono de contacto*</label>
+              <input class="form-control" type="tel" id="userTel" required>
+              <div class="invalid-feedback">
+                Debe ingresar su telefono de contacto
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+
+
+
+
+        </form>
+
+      </div>
+
+
     </div>
+
   </main>
   <footer class="text-muted">
     <div class="container">

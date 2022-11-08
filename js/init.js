@@ -61,9 +61,10 @@ function obtener_datos() {
           ${localStorage.getItem('usuario')}
         </button>
       
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <ul class="dropdown-menu dropdown-menu-dark w-25" aria-labelledby="dropdownMenuLink">
           <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
           <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+          <hr class="dropdown-divider">
           <li><a onclick="removeItem()" class="dropdown-item" href="login.html">Cerrar sesion</a></li>
         </ul>
       </div>
